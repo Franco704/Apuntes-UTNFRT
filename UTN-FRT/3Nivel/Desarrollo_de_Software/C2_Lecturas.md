@@ -3,7 +3,7 @@ materia: Desarrollo de Software
 unidad: 1
 tipo: #lectura/resumen
 ---
-#  Resumen de Lecturas: Unidad 1
+#  Resumen de Lecturas: [Unidad 1](Unidad%201.md) (Clase 2)
 
 > [!INFO]  Fuente
 > **Libro:** Pro Git, 2da Edición.
@@ -33,7 +33,7 @@ Git nació de la comunidad de Linux (liderada por Linus Torvalds) tras un confli
 > 2. **Modificado (Modified):** Se modificaron archivos pero todavía no fueron confirmados en la BD.
 > 3. **Preparado (Staged):** Se marcó un archivo modificado en su versión actual para que vaya en tu próxima confirmación.
 
-![[Pasted image 20260404154123.png]]
+![Estados Principales](../../Bibliografia/Pasted%20image%2020260404154123.png)
 
 ---
 
@@ -46,7 +46,7 @@ Git nació de la comunidad de Linux (liderada por Linus Torvalds) tras un confli
     * Directorio existente: `git init` (crea un subdirectorio nuevo llamado `.git`).
     * Desde otro servidor: `git clone [url]`.
 * **Guardando cambios:** Cada archivo puede estar rastreado (*tracked files*), o sin rastrear (*untracked*).
-    ![[Pasted image 20260404163027.png]]
+    ![Ciclos de Vida de los Archivos](../../Bibliografia/Pasted%20image%2020260404163027.png)
 * **Revisando el Estado:** Para determinar en qué estado están los archivos utilizaremos `git status`.
 * **Rastrear / Preparar:** Para comenzar a rastrear un archivo o prepararlo, utilizaremos el comando `git add`.
 * **Confirmando cambios:** Cualquier cosa que no esté preparada no será confirmada. Utilizaremos `git commit`.
@@ -56,9 +56,9 @@ Git nació de la comunidad de Linux (liderada por Linus Torvalds) tras un confli
 * **Eliminando archivos:** `git rm` (lo elimina de los archivos rastreados y del directorio de trabajo).
 * **Cambiando el nombre:** Git no rastrea explícitamente los cambios de nombre, para ello utilizaremos `git mv [origen] [destino]`.
 * **Ver el historial:** La herramienta básica es `git log`, posee opciones útiles para filtrar.
-    ![[Pasted image 20260404164128.png]]
-    ![[Pasted image 20260404164200.png]]
-    ![[Pasted image 20260404164312.png]]
+    ![Opciones1](../../Bibliografia/Pasted%20image%2020260404164128.png)
+    ![Opciones 2](../../Bibliografia/Pasted%20image%2020260404164200.png)
+    ![Opciones 3](../../Bibliografia/Pasted%20image%2020260404164312.png)
 
 ### Deshacer Cambios
 *(A veces no es posible recuperar algo luego de que lo deshacemos).*
@@ -77,4 +77,4 @@ Para colaborar necesitamos gestionar repositorios remotos (versiones hospedadas 
 
 ### Alias de Git
 Se pueden configurar algunos alias para no escribir todos los comandos por completo.
-![[Pasted image 20260404170141.png]]
+![Uso de Alias](../../Bibliografia/Pasted%20image%2020260404170141.png)

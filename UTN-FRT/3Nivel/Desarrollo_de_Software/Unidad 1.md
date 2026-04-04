@@ -17,8 +17,7 @@ unidad: 1
 
 ### Clase 2: Git Básico
 - **Temas:** Git comandos básicos y Bash.
-- [ ] **Lectura:** Pro Git Cap 1 y 2 (hasta pág. 43, no incluir Etiquetado).
-- [ ] **Lectura:** Análisis y diseño orientado a objetos.
+- [ ] **Lectura:** Pro Git Cap 1 y 2 (No incluir etiquetado)|Análisis y diseño orientado a objetos con aplicaciones Cap 2.[Resumen Lecturas](C2_Lecturas.md)
 - [ ] **Ejercicio 2:** Control de Versiones (`[[Git]]`) ![DSW2026_EJ02](../../Bibliografia/DSW2026_EJ02.pdf) ![[DSW2026_EJ02.zip]].
 
 ### Clase 3: Manejo de Ramas
