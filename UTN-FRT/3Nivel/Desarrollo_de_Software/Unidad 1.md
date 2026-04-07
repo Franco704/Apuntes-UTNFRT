@@ -11,14 +11,9 @@ unidad: 1
 
 ## 🗺️ Seguimiento de Clases y Tareas
 
-### Clase 1: Presentación y POO
-- **Temas:** Repaso de `[[POO]]` y depuración de código.
-- [ ] **Ejercicio 1:** Realizar depuración ![DSW2026_EJ01](../../Bibliografia/DSW2026_EJ01.pdf) ![[DSW2026_EJ01.zip]].
+### Clase 1: Presentación y POO - **Temas:** Repaso de `[[POO]]` y depuración de código. - [x] **Ejercicio 1:** Realizar depuración [C1_Depuracion](C1_Depuracion.md) | 📄 [PDF del Ejercicio](../../Bibliografia/DSW2026_EJ01.pdf) | 📦 [Descargar ZIP](../../Bibliografia/DSW2026_EJ01.zip).
 
-### Clase 2: Git Básico
-- **Temas:** Git comandos básicos y Bash.
-- [ ] **Lectura:** Pro Git Cap 1 y 2 (No incluir etiquetado)|Análisis y diseño orientado a objetos con aplicaciones Cap 2.[Resumen Lecturas](C2_Lecturas.md)
-- [ ] **Ejercicio 2:** Control de Versiones (`[[Git]]`) ![DSW2026_EJ02](../../Bibliografia/DSW2026_EJ02.pdf) ![[DSW2026_EJ02.zip]].
+### Clase 2: Git Básico - **Temas:** Git comandos básicos y Bash. - [x] **Lectura:** Pro Git Cap 1 y 2 (No incluir etiquetado)|Análisis y diseño orientado a objetos con aplicaciones Cap 2.[Resumen Lecturas](C2_Lecturas.md) - [ ] **Ejercicio 2:** Control de Versiones (`[[Git]]`) | 📄 [PDF del Ejercicio](../../Bibliografia/DSW2026_EJ02.pdf) | 📦 [Descargar ZIP](../../Bibliografia/DSW2026_EJ02.zip).
 
 ### Clase 3: Manejo de Ramas
 - **Temas:** `[[Git]]`: Manejo de ramas.
