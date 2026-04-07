@@ -42,3 +42,5 @@ Es el nombre dado a una tecnología de almacenamiento dedicada a compartir la ca
 
 ### Cloud Storage (Almacenamiento en la Nube)
 Es un modelo de almacenamiento de datos basado en redes, donde los datos están alojados en espacios de almacenamiento virtualizados, por lo general aportado por terceros.
+
+[Clase 2026-04-07](20260407.md)

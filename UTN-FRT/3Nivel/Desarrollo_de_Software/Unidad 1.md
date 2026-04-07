@@ -28,3 +28,6 @@ unidad: 1
 ---
 **Estructura en las VM (Referencia):**
 ![Pasted image 20260331204311](../../Bibliografia/Pasted%20image%2020260331204311.png)
+
+
+

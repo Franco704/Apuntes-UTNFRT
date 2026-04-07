@@ -3,7 +3,7 @@ materia: Desarrollo de Software
 unidad: 1
 tipo: #practica/ejercicio
 ---
-# Depuración de Código: Ejercicio 1 (Repaso POO)
+ # Depuración de Código: Ejercicio 1 (Repaso POO)
 
 > [!INFO]  Diagnóstico Inicial
 > Inicialmente notamos que el programa no soluciona correctamente la situación problemática, realizando errores en los consumos en ambos tipos de vehículos. 
@@ -26,7 +26,7 @@ Arreglando dicha función nos quedaría:
 ### 2. En la clase: `VehiculoElectrico`
 Encontramos múltiples errores en este método:
 - Le falta el parámetro `(double kilometros)` a la función, por lo que no está sobrescribiendo el método de la clase padre.
-- Suma literalmente `0.156` a la variable, en lugar de sumarle el 15% al total de consumo.
+- Suma literalmente `0.15` a la variable, en lugar de sumarle el 15% al total de consumo.
 - Se nos solicitó que el consumo se dispare si la capacidad "supera los 1200", pero el código tiene incluido al 1200 (`>= 1200`), debería ser `>`.
 - Falta calcular el consumo por cada 100 km.
 
