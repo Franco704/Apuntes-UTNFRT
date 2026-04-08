@@ -5,7 +5,7 @@ tipo: #practica/ejercicio
 ---
 #  Ejercicio 2: Control de Versiones (Git)
 
-> [!INFO] 📝 Preparación Inicial
+> [!INFO]  Preparación Inicial
 > Comenzamos el trabajo práctico instalando la herramienta Git. En mi caso ya la tengo instalada nativamente en mi distribución de Linux.
 > 
 > ![Instalación](../../Bibliografia/Pasted%20image%2020260408114143.png)
@@ -51,13 +51,13 @@ tipo: #practica/ejercicio
       ![Extensiones ignore](../../Bibliografia/Pasted%20image%2020260408122614.png)
 
 11. Ya que tenemos configurado correctamente el `.gitignore` podemos hacer un `git add .` general sin problemas.
-12. Hacemos un commit para registrar la adición masiva: `git commit -m "Punto 7"`.
+12. Hacemos un commit para registrar la adición masiva: `git commit -m "Punto 7"`. Confirmamos con `git push`
    ![Commit general](../../Bibliografia/Pasted%20image%2020260408123435.png)
 
 13. Luego de modificar el último párrafo del archivo `analysis.txt`, revisamos las diferencias exactas de lo que se modificó mediante: `git diff analysis.txt`.
    ![Git diff](../../Bibliografia/Pasted%20image%2020260408124126.png)
 
-14. Agregamos el archivo y hacemos un commit para guardar el cambio. 
+14. Agregamos el archivo y hacemos un commit para guardar el cambio. Confirmamos con `git push`
    ![Commit diff](../../Bibliografia/Pasted%20image%2020260408124235.png)
 
 15. Eliminamos el archivo tanto del disco como del registro de Git con `git rm`.
@@ -70,5 +70,5 @@ tipo: #practica/ejercicio
 18. Realizamos el cambio de nombre de un archivo mediante el comando `git mv <original> <nuevo>` y realizamos el commit. 
     ![Git mv](../../Bibliografia/Pasted%20image%2020260408124956.png)
 
-19. Revisamos el historial de registro simplificado mediante: `git log --oneline`.
+19. Revisamos el historial de registro simplificado mediante: `git log --oneline`. Originalmente cuando realice el ejercicio no realice los git push correspondientes, por lo que el log nos muestra que estamos adelantados al repositorio original.
     ![Git log](../../Bibliografia/Pasted%20image%2020260408125155.png)
