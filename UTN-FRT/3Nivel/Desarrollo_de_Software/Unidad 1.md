@@ -15,10 +15,7 @@ unidad: 1
 
 ### Clase 2: Git Básico - **Temas:** Git comandos básicos y Bash. - [x] **Lectura:** Pro Git Cap 1 y 2 (No incluir etiquetado)|Análisis y diseño orientado a objetos con aplicaciones Cap 2.[Resumen Lecturas](C2_Lecturas.md) - [ ] **[Ejercicio 2: Control de Versiones](C2_ControldeVersiones.md) 📄 [PDF del Ejercicio](../../Bibliografia/DSW2026_EJ02.pdf) | 📦 [Descargar ZIP](../../Bibliografia/DSW2026_EJ02.zip).
 
-### Clase 3: Manejo de Ramas
-- **Temas:** `[[Git]]`: Manejo de ramas.
-- [ ] **Lectura:** Pro Git Cap 3.
-- [ ] **Ejercicio 3:** Control de Versiones ![DSW2026_EJ03](../../Bibliografia/DSW2026_EJ03.pdf).
+### Clase 3: Manejo de Ramas - **Temas:**Manejo de Ramas. - [x] **Lectura:** Pro Git Cap3[ ]  [Resumen Lectura](C3_Lecturas.md) |![PDF del Ejercicio](../../Bibliografia/DSW2026_EJ03.pdf) **
 
 ### Clase 4: GitHub y Entornos Distribuidos
 - **Temas:** Git en entornos distribuidos (`[[GitHub]]`).
