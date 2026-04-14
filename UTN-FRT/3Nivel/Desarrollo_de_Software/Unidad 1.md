@@ -19,7 +19,7 @@ unidad: 1
 
 ### Clase 4: GitHub y Entornos Distribuidos
 - **Temas:** Git en entornos distribuidos (`[[GitHub]]`).
-- [ ] **Lectura:** Pro Git Cap 5 y 6.
+- [x] **Lectura:** Pro Git Cap 5 y 6.[C4_Lecturas](C4_Lecturas.md)
 - [ ] **Ejercicio 4:** Control de Versiones.
 
 ---
