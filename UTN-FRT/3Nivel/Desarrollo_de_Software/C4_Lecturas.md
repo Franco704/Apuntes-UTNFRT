@@ -1,244 +1,238 @@
-#  Resumen de Lectura: [Unidad 1](Unidad%201.md) (Clase 4)
+# Resumen de Lectura: [Unidad 1](Unidad%201.md) (Clase 4)
 
-> [!INFO]  Fuente
+> [!INFO] Fuente
 > **Libro:** Pro Git, 2da Edición.
 > **Capítulo:** 5 y 6.
 
-### Capitulo 5 "Git en entornos Distribuidos"
+---
 
-A diferencia de los Sistemas Centrailzados de Control de Versiones, la naturaleza distribuida de Git permite mucha más flexibilidad en la manera de colaborar en proyectos.
+## Capítulo 5: Git en entornos Distribuidos
 
-## Flujos de Trabajo Centralizado
+A diferencia de los Sistemas Centralizados de Control de Versiones, la naturaleza distribuida de Git permite mucha más flexibilidad en la manera de colaborar en proyectos.
 
-En sistemas centralizados habitualmente solo hay un modelo de colaboración, un repositorio o punto central que acepta código y todos sincronizan su trabajo con el. 
-![](../../../Pasted%20image%2020260413201459.png)
-Si dos desarrolladores clonan desde el punto central, y ambos hacen cambios, soo el primer desarrollador en subir sus cambios lo podrá hacer sin problemas, el segundo debe fusionar el trabajo del primero antes de subir sus cambios, para no sobreescribir los cambios del primero.
+### Flujos de Trabajo Centralizado
 
-## Flujo de Trabajo Administrador-Integración
+En sistemas centralizados habitualmente solo hay un modelo de colaboración: un repositorio o punto central que acepta código y todos sincronizan su trabajo con él. 
 
-Debido a que Git permite tener múltiples repositorios remotos, es posible tener un flujo de trabajo donde cada desarrollador tenga acceso de escritura a su propio repositorio público y acceso de lectura a todos los demás. Este escenario a menudo incluye un repositorio canónico que representa el proyecto "oficial". Para contribuir a ese proyecto creas tu propio clon público del proyecto y haces un pull con tus cambios. Luego, puede enviar una solicitud al administrador del proyecto principal para que agregue los cambios. Entonces, el administrador agrega el repositorio como remoto, prueba los cambios localmente, los combina en su rama y los envía al repositorio.
-![](../../../Pasted%20image%2020260413201852.png)
-Este es un flujo de trabajo muy común con herramientas basadas en hubs, donde es fácil hacer un fork de un proyecto e introducir los cambios en este fork para que todos puedan verlos. Una de las principales ventajas de este enfoque es que el contribuidor puede continuar realizando cambios y el administrador principal del repositorio puede incorporar los cambios en cualquier momento. Los contribuidores no tienen que esperar a que el proyecto incorpore sus cambios.
+![](Bibliografia/Pasted%20image%2020260413201459.png)
 
-## Flujo de Tabajo Dictador-Tenientes
+> [!WARNING] Cuidado con las sobreescrituras
+> Si dos desarrolladores clonan desde el punto central y ambos hacen cambios, solo el primer desarrollador en subir sus cambios lo podrá hacer sin problemas. El segundo **debe fusionar el trabajo del primero** antes de subir sus cambios para no sobreescribir el trabajo ajeno.
 
-Es una variante del flujo de múltiples repositorios. Generalmente es utilizado por grandes proyectos con cientos de colaboradores (Ejemplo famoso el kernel de Linux). Varios administradores de integración están a cargo de ciertas partes del repositorio. Se les llaman "tenientes". Todos los tenientes tienen un gerente de integración conocido como el "dictador benévolo". El repositorio del dictador benevolente sirve como el repositorio de referencia del cual todos los colaboradores necesitan realizar pull.
-![](../../../Pasted%20image%2020260413202355.png)
+### Flujo de Trabajo Administrador-Integración
 
+Debido a que Git permite tener múltiples repositorios remotos, es posible tener un flujo de trabajo donde cada desarrollador tenga acceso de escritura a su propio repositorio público y acceso de lectura a todos los demás. 
 
-## Contribuyendo a un Proyecto
+Este escenario a menudo incluye un repositorio canónico que representa el proyecto "oficial". 
+1. Para contribuir a ese proyecto, creas tu propio clon público del proyecto y haces un `pull` con tus cambios. 
+2. Luego, puedes enviar una solicitud al administrador del proyecto principal para que agregue los cambios. 
+3. Entonces, el administrador agrega tu repositorio como remoto, prueba los cambios localmente, los combina en su rama y los envía al repositorio oficial.
 
-Debido a que Git es muy flexible, las personas pueden trabajar juntas de muchas maneras, y es problemático describir como deberían contribuir: cada proyecto es un poco diferente. Algunas de las variables involucradas son conteo de contribuyentes activos, flujo de trabajo elegido, acceso de confirmación y posiblemente el método de contribución externa.
-Nuestra primera variable es el conteo de contribuyentes activos,  conforme tengamos más desarrolladores, nos encontraremos con más problemas para asegurarnos de que el código se aplique de forma limpia o se pueda fusionar fácilmente. Los cambios que enviemos pueden quedar obsoletos o severamente interrumpidos por el trabajo que se fusionó mientras trabajábamos o mientras los cambios estaban esperando a ser aprobados o aplicados.
-La siguiente variable es el flujo de trabajo en uso para el proyecto, ¿es centralizado con cada desarrollador teniendo el mismo acceso de escritura a la linea de código principal?¿el proyecto tiene un mantenedor?¿están todos los parches revisados por pares y aprobados?¿estamos involucrados en ese proceso?¿hay una sistema de tenientes en su lugar, y tiene que enviar su trabajo primero?
-El siguiente problema es el acceso de confirmación. El flujo de trabajo requerido para contribuir a un proyecto es muy diferente si tenemos acceso de escritura al proyecto que si no lo tiene. Si no tenemos acceso de escritura, ¿como prefiere el proyecto aceptar el trabajo contribuido?¿incluso tiene una política?¿cuánto trabajo estamos contribuyendo a la vez?¿con qué frecuencia contribuimos?
+![](Bibliografia/Pasted%20image%2020260413201852.png)
 
-## Pautas de Confirmación
+> [!TIP] Ventajas de este modelo
+> Este es un flujo de trabajo muy común con herramientas basadas en hubs, donde es fácil hacer un *fork* de un proyecto e introducir los cambios en este *fork* para que todos puedan verlos. El contribuidor puede continuar realizando cambios y el administrador principal del repositorio puede incorporar los cambios en cualquier momento sin frenar el flujo de trabajo de nadie.
 
-En primer lugar, no se desea enviar ningún error de espacios en blanco. Git proporciona una manera fácil de verificar esto: antes de comprometerse, ejecutando `git diff --check` identificamos posibles errores de espacio en blanco y nos lo enumera. Si ejecutamos ese comando antes de continuar, podemos ver si está a punto de cometer errores de espacio en blanco que pueden molestar a otros desarrolladores.
-A continuación, intentemos hacer de cada commit un conjunto de cambios lógicamente separado, si se puede tratar de hacer cambios digeribles, no pushear un cumulo de trabajo grande de golpe, incluso podemos utilizar el área de etapas para dividir el trabajo en al menos una confirmación por cuestión, con un mensaje útil por confirmación. Si algunos de los cambios modiifcan el mismo archivo, intentemos utilizar `git add --patch` para representar parcialmente los archivos.
-Lo ultimo a tener en cuenta es el mensaje de compromiso. Tener el habito de crear mensajes de calidad hace que usar y colaborar con Git sea mucho más fácil. Como regla general, sus mensajes deben comenzar con una sola línea que no supere los 50 caracteres y que describa el conjunto d ecambios de forma concisa, seguido de una linea en blanco, seguida de una explicación más detallada.
-![](../../../Pasted%20image%2020260413203941.png)
+### Flujo de Trabajo Dictador-Tenientes
 
+Es una variante del flujo de múltiples repositorios, generalmente utilizado por grandes proyectos con cientos de colaboradores (el ejemplo más famoso es el kernel de Linux). 
 
-## Pequeño equipo privado
-![](../../../Pasted%20image%2020260413204805.png)
+* **Tenientes:** Varios administradores de integración que están a cargo de ciertas partes específicas del repositorio.
+* **Dictador Benévolo:** El gerente de integración de todos los tenientes. El repositorio del dictador benévolo sirve como el repositorio de referencia (oficial) del cual todos los colaboradores necesitan realizar `pull`.
 
-## Equipo privado administrado
-![](../../../Pasted%20image%2020260413204914.png)
+![](Bibliografia/Pasted%20image%2020260413202355.png)
 
-## Proyecto público bifurcado
+---
 
-Contribuir a proyectos públicos es un poco diferente. Como no tenemos los permisos para actualizar directamente las ramas en el proyecto, debemos obtener el trabajo de otra manera. 
-La siguiente parte trata de proyectos que prefieren aceptar parches contribuidos por correo electrónico.
-En primer lugar, es probable que deseemos clonar el repositorio principal, crear una rama de tema para el parche o la serie de parches en que planeamos contribuir y hacer nuestro trabajo allí. La secuencia se ve básicamente así: 
-![](../../../Pasted%20image%2020260413205506.png)
-Podemos usar `rebase -i` para reducir el trabajo a una unica confirmacion, o reorganizar le trabajo en las confirmaciones para que el desarrollador pueda revisar el parche más fácilmente.
-Cuando finalicemos el trabajo en la rama y estemos listos para contribuir con los mantenedores vamos a la página original del proyecto y hacemos click en el botón "FORK", creando nuestro propio fork escribible del proyecto. Luego debemos agregar esta nueva URL de repositorio como segundo control remoto, en este caso llamado myfork: `git remote add myfork (url)`
-Entonces necesitamos impulsar nuestro trabajo a esa nueva URL. Es más facil impulsar la rama de tema en la que se esta trabajando hasta su repositorio, en lugar de fusionarse con la rama principal y aumentarla. `git push -u myfork featureA`
-Cuando nuestro trabajo ha sido empujado al fork, debemos notificar al mantenedor, a menudo se denomina solicitud de extracción y podemos generarlo a través del sitio web, se puede ejecutar el comando `git request-pull` y enviar por correo electrónico la salida al mantenedor del proyecto de forma manual.
-El comando `request-pull` toma la rama base en la que se desea que se saque su rama de tema y la URL del repositorio de Git de la que se desea que extraigan, y genera un resumen de todos los cambios que estamos solicitando.
+### Contribuyendo a un Proyecto
 
-## Manteniendo un proyecto
+Debido a que Git es muy flexible, las personas pueden trabajar juntas de muchas maneras, y es problemático describir cómo *deberían* contribuir: cada proyecto es un poco diferente. Algunas de las variables involucradas son:
 
-Además de saber cómo contribuir de manera efectiva a un proyecto debemos saber cómo mantenerlo. Eso puede comprender desde aceptar y aplicar parches generados vía `format-patch` enviados por correo, hasta integrar cambios en ramas remotas para repositorios que añadimos como remotos a nuestro proyectos.
+* **Conteo de contribuyentes activos:** Conforme tengamos más desarrolladores, nos encontraremos con más problemas para asegurarnos de que el código se aplique de forma limpia o se pueda fusionar fácilmente.
+* **Flujo de trabajo elegido:** ¿Es centralizado? ¿El proyecto tiene un mantenedor? ¿Están todos los parches revisados por pares y aprobados? ¿Hay una sistema de tenientes en su lugar?
+* **Acceso de confirmación:** El flujo requerido es muy diferente si tenemos acceso de escritura al proyecto que si no lo tenemos. Si no lo tenemos, ¿cómo prefiere el proyecto aceptar el trabajo contribuido? ¿Con qué frecuencia se contribuye?
 
-## Trabajando en ramas puntuales
+### Pautas de Confirmación (Commits)
 
-Cuando estamos pensando en integrar nuevo trabajo, generalmente es una buena idea probarlo en una rama puntual (topic branch), una rama temporal específicamente creada para probar ese nuevo trabajo. De esta forma, es fácil ajustar un parche individualmente y abandonarlo si no funciona hasta que tengamos el tiempo de retomarlo. Si creamos una rama simple con un nombre relacionado con el trabajo que vamos a probar, como `ruby_client` o algo igualmente descriptivo, podemos recordarlo fácilmente si tenemos que abandonarlo y retomarlo posteriormente. El responsable del mantenimiento del proyecto GIt también tiende a usar una nomenclatura con este formato - como `sc/ruby_client`, donde `sc` es la abreviatura de la persona que envió el trabajo.
+1. **Evitar errores de espacios en blanco:** Git proporciona una manera fácil de verificar esto. Antes de comprometerte, ejecuta `git diff --check`. Esto identifica posibles errores de espacio en blanco y los enumera, evitando molestias a otros desarrolladores.
+2. **Cambios lógicamente separados:** Intenta hacer de cada commit un conjunto de cambios digeribles, no pushear un cúmulo de trabajo grande de golpe. Puedes utilizar el área de preparación (*staging area*) para dividir el trabajo en al menos una confirmación por cuestión, usando `git add --patch` para preparar parcialmente los archivos.
+3. **Calidad del mensaje del commit:** Tener el hábito de crear mensajes de calidad hace que colaborar con Git sea mucho más fácil.
 
-## Aplicando parches recibidos por e-mail
+> [!NOTE] Regla de Oro para Mensajes de Commit
+> Como regla general, tus mensajes deben comenzar con una sola línea que **no supere los 50 caracteres** y que describa el conjunto de cambios de forma concisa. A esto le debe seguir una línea en blanco, y posteriormente una explicación más detallada.
 
-Si recibimos por correo un parche que necesitamos integrar en nuestro proyecto, debemos aplicarlo en la rama puntual para evaluarlo. Hay dos formas de aplicar un parche, veamos cuales son:
+![](Bibliografia/Pasted%20image%2020260413203941.png)
 
-## Aplicando parches con `apply`
-Si recibimos el parche de alguien que lo generó con `git diff` o con el comando Unix `diff` (no recomendado) podemos aplicarlo con el comando `git apply`, suponiendo que guardamos el parche en `/tmp/patch-ruby-client.patch` podemos aplicarlo así: `git apply /tmp/patch-ruby-client.patch` 
-Esto modifica los archivos en nuestro directorio de trabajo. Es casi idéntico al ejecutar un comando `patch -p1` para aplicar el parche, aunque es más paranoico y acepta menos coincidencias aproximadas que patch. Tambien puede manejar archivos nuevos, borrados y renombrados si están descritos en formato `git diff` mientras que `patch` no puede hacerlo.
-También podemos usar `git apply` para comprobar si un parche se aplica de forma limpia antes de aplicarlo realmente - podemos ejecutar `git apply --check` indicando el parche.
+#### Pequeño equipo privado
+![](Bibliografia/Pasted%20image%2020260413204805.png)
 
-## Aplicando un parche con `am`
-Si el colaborador es un usuario de Git y conoce lo suficiente como para usar el comando `format-patch` para generar el parche, entonces el trabajo es más sencillo, puesto que el parche ya contiene información del autor y un mensaje de commit. Si podemos, animemos a nuestros colaboradores a usar `format-patch` en lugar de `diff`.
-Para aplicar un parche generado con `format-patch`, usamos `git am`. Técnicamente, `git am` se construyó para leer de un archivo de mbox.
-Es posible que el parche no se aplique limpiamente, quizas nuestra rama principal es muy diferente de la rama a partir de la cual se creó el parche, o el parche depende de otro parque que aún no hemos aplicado. En ese caso, el proceso `git am` fallará y nos preguntará que hacer, esos problemas se solucionan de la misma forma que `merge` o `rebase`, editamos el archivo para resolver el conflicto, preparamos y ejecutamos `git am --resolved`
+#### Equipo privado administrado
+![](Bibliografia/Pasted%20image%2020260413204914.png)
 
-## Decidiendo qué introducir
-A menudo es útil obtener una lista de todos los commits de una rama que no están en nuestra rama principal. Podemos excluir de dicha lista los commits de la rama principal anteponiendo la opción `--not` al nombre de la rama
+---
 
-## Etiquetando las versiones
-Cuando lanzamos una versión, y queremos etiquetarla para poder generarla más adelante en cualquier momento, podemos crear una nueva etiqueta. Si decidimos firmar la etiqueta como responsable de mantenimiento, el etiquetado seria algo asi:
-![](../../../Pasted%20image%2020260413213249.png)
-Si firmamos nuestras etiquetas podemos tener problemas a la hora de distribuir la clave PGP Publica usada para firmarlas. El responsable de mantenimiento del proyecto Git ha conseguido solucionar este problema incluyendo su clave publica como un objeto binario en el repositorio, añadiendo a continuación una etiqueta que apunta directamente a dicho contenido. Para hacer esto, puedes averiguar que clave necesitas lanzando el comando `gpg --list-keys`
-Ahora ya podemos importar directamente la clave en la base de datos de Git, exportandola y redirigiéndola a través del comando `git hash-object`.
-Una vez que tenemos los contenidos de la clave en Git, podemos crear una etiqueta que apunte directamente a dicha clave indicando el nuevo valor SHA-1 que devolvió el comando hash-object.
+### Proyecto Público Bifurcado (Forked)
 
-## Generando un número de compilación
-Como Git no genera una serie de números monótamente creciente como v123 o similar con cada commit, si queremos tener un nombre más comprensible para un commit, podemos ejecutar el comando `git describe`.
+Contribuir a proyectos públicos es un poco diferente. Como no tenemos los permisos para actualizar directamente las ramas en el proyecto, debemos proponer el trabajo de otra manera.
 
-## Preparando una versión
-Una cosa que podemos hacer es crear un archivo con la ultima instantánea del código para las pobres almas que no usan Git. El comando es `git archive`
-![](../../../Pasted%20image%2020260413213730.png)
-Si alguien abre el archivo tar, obtiene la última instantánea de tu proyecto bajo un directorio project.
+Secuencia habitual para aportar mediante parches/forks:
+1. Clonar el repositorio principal.
+2. Crear una rama de tema (topic branch) para el parche o la serie de parches con los que planeamos contribuir, y hacer nuestro trabajo allí. 
+   *(Opcional)*: Podemos usar `rebase -i` para reducir el trabajo a una única confirmación o reorganizarlo para que el revisor pueda leer el parche más fácilmente.
 
+![](Bibliografia/Pasted%20image%2020260413205506.png)
 
-# Capitulo 6: GitHub
+3. Ir a la página original del proyecto y hacer clic en **"FORK"**, creando nuestro propio fork escribible.
+4. Agregar esta nueva URL de repositorio como segundo remoto (ej. `myfork`): 
+   `git remote add myfork <url>`
+5. Impulsar nuestra rama de tema al fork: 
+   `git push -u myfork featureA`
+6. Generar una solicitud de extracción (*Pull Request*). Si el proyecto prefiere correos, se puede ejecutar `git request-pull` y enviar por correo electrónico la salida al mantenedor de forma manual. Este comando genera un resumen de todos los cambios que estamos solicitando.
 
-## Creación y configuración de la cuenta
-Lo primeros que necesitamos hacer es crear una cuenta de usuario, elegimos nuestro nombre de usuario, correo, contraseña y creamos la cuenta.
-GitHub proporciona toda su funcionalidad en cuentas gratuitas, podemos tener tantos proyectos públicos como privados ilimitados. La unica limitación es que en cada uno de nuestros proyectos privados solo podemos tener un máximo de tres colaboradores. Los planes de pago de GitHub te permiten tener algunas herramientas extras, pero no es algo que veremos en el libro.
+---
 
-## Acceso SSH
-Desde ya, podemos acceder a los repositorios Git mediante el protocolo HTTPS, identificándonos con el usuario y la contraseña que elegimos. Sin embargo para simplificar el clonado de proyectos públicos no necesitamos crear una cuenta.
-Si preferimos utilizar SSH, necesitamos configurar una clave pública.
+### Manteniendo un Proyecto
 
-## Tu icono
-También, si lo deseamos podemos reemplazar nuestro avatar con una imagen de nuestra elección.
+Además de saber cómo contribuir, debemos saber cómo mantener un proyecto. Esto abarca desde aceptar parches vía `format-patch` por correo, hasta integrar ramas remotas de repositorios que añadimos.
 
-## Tus direcciones de correo
-La forma con la que GitHub identifica tus contribuciones a Git es mediante la direccion de correo electrónico. Si tenemos varias direcciones diferentes en nuestras contribuciones y queremos que GitHub sepa que son de tu cuenta, necesitas añadirlas todas en el apartado Emails de la sección administración.
+#### Trabajando en ramas puntuales (Topic Branches)
+Al integrar nuevo trabajo, es buena idea probarlo en una rama temporal específica. De esta forma, es fácil ajustar un parche individualmente o abandonarlo si no funciona. 
+* *Nomenclatura recomendada:* `nombre_del_colaborador/nombre_del_tema` (Ejemplo: `sc/ruby_client`).
 
-## Autentificación de dos pasos
-Finalmente, y para mayor seguridad, deberías configurar el 2FA.
+#### Aplicando parches recibidos por e-mail
 
-Participando en Proyectos
-Bifurcación (fork) de proyectos.
-Si queremos participar en un proyecto existente, en el que no tenemos permisos de escritura, podemos hacerle un fork.
-Para bifurcar un proyecto, visitamos la página del mismo y pulsamos sobre el botón "Fork", en unos segundos nos redireccionarán a una página nueva de proyecto en nuestra cuenta y con nuestra propia copia del código fuente.
+Hay dos formas principales de evaluar e integrar parches recibidos:
 
-## El flujo de Trabajo en GitHub
-GitHub está diseñando alrededor de un flujo de trabajo de colaboración específico, centrado en las solicitaciones de integración (pull request). El funcionamiento habitual es el siguiente:
-![](../../../Pasted%20image%2020260413215211.png)
+**1. Aplicando parches con `apply`**
+Si el parche se generó con `git diff`, se aplica con `git apply`. Ejemplo:
+`git apply /tmp/patch-ruby-client.patch`
+Esto modifica los archivos en el directorio de trabajo (similar a `patch -p1`, pero más estricto y capaz de manejar archivos nuevos/borrados/renombrados).
+* *Tip:* Usa `git apply --check /tmp/patch-ruby-client.patch` para comprobar si un parche se aplicará limpiamente antes de ejecutarlo.
 
-Esto es básicamente, el flujo de trabajo del Responsable de Integración visto en Flujo de Trabajo Administrador-Integración, pero en lugar de usar el correo para comunicarnos y revisar los cambios, lo que se hace es usar las herramientas web de GitHub.
+**2. Aplicando un parche con `am` (Recomendado)**
+Si el colaborador generó el parche con `format-patch`, el trabajo es más sencillo porque ya contiene información del autor y un mensaje de commit.
+* Se aplica con: `git am` (originalmente construido para leer archivos *mbox*).
+* Si falla por conflictos, el proceso se pausa. Se resuelve como un `merge` o `rebase`: editas el archivo, lo preparas y ejecutas `git am --resolved`.
 
-## Creación del Pull Request
-Comenzamos pulsando el botón Fork, y en la copia comenzar a trabajar, la clonamos localmente, creamos una rama, realizamos el cambio sobre el código fuente y finalmente enviamos esos cambios a GitHub.
-![](../../../Pasted%20image%2020260413215604.png)
-Ahora, si miramos nuestra bifurcación en GitHub, veremos que aparece un aviso de creación de la rama y nos dará la oportunidad de hacer una solicitud de integración con el proyecto original.
-![](../../../Pasted%20image%2020260413215913.png)
-Si pulsamos en el botón verde, veremos una pantalla que permite crear un titulo y una descripcion para darle al propietario original una buena razón para tenerla en cuenta.
-Tambien veremos la lista de commits de la rama que están "por delante" de la rama master y un "diff unificado" de los cambios que se aplicarían si se fusionasen con el proyecto original.
-![](../../../Pasted%20image%2020260413220027.png)
-Cuando seleccionemos el botón create pull request, el propietario del proyecto recibirá una notificación de que alguien sugiere un cambio 
-junto a un enlace donde está toda la información.
+#### Decidiendo qué introducir
+Para obtener una lista de todos los commits de una rama que *no* están en nuestra rama principal, podemos usar el modificador `--not`. Ejemplo: comparar una rama puntual excluyendo lo que ya está en master.
 
-## Evolución del Pull Request
-En este punto, el propietario puede revisar el cambio sugerido e incorporarlo al proyecto, o bien rechazarlo o comentarlo.
-![](../../../Pasted%20image%2020260413220651.png)
-El propietario puede revisar el "diff" y dejar un comentario pulsando en cualquier linea del "diff", cuando el responsable hace el comentario, la persona que solicitó la integración recibirán una notificación.
-Cualquiera puede añadir sus propios comentarios. 
-![](../../../Pasted%20image%2020260413220757.png)
-El participante puede ver ahora qué tiene que hacer para que sea aceptado su cambio. Con suerte será poco trabajo. Mientras que con el correo electronico tendrias que revisar los cambios y reenviarlos, en GitHub puedes, simplemente, enviar un nuevo commit a la rama y subirla.
-![](../../../Pasted%20image%2020260413220856.png)
-Es interesante notar que si pulsamos en "Files Changed", verás el "diff unificado", es decir, los cambios que se introducirán en la rama principal si la otra rama fuera fusionada.
-Otra cosa interesante es que GitHub también comprueba si el Pull Request se fusionaría limpiamente, dando entonces un botón para hacerlo.
+#### Etiquetando las versiones (Tags)
+Cuando lanzamos una versión, podemos crear una etiqueta. 
+![](Bibliografia/Pasted%20image%2020260413213249.png)
 
-## Pull Requests Avanzados
+> [!INFO] Etiquetas Firmadas
+> Si decides firmar tus etiquetas, necesitarás distribuir tu clave PGP Pública. Puedes incluir tu clave pública como un objeto binario en el repositorio usando `git hash-object` (tras listar tus claves con `gpg --list-keys`) y crear una etiqueta que apunte directamente a ese SHA-1.
 
-## Pull Requests como parches
-Hay que entender que muchos proyectos no tienen idea de que los Pull Request sean colas de parches perfectos que se pueden aplicar limpiamente en orden, como sucede con los proyectos basados en listas de correo. Casi todos los proyectos de GitHub consideran las ramas de Pull Request como conversaciones evolutivas acerca de un cambio propuesto, culminando en un "diff" unificado que se aplica fusionando.
+#### Generando un número de compilación
+Como Git no genera números correlativos automáticamente (tipo v1, v2, v3...), puedes usar el comando `git describe` para generar un nombre comprensible y único para un commit específico.
 
-## Manteniendonos actualizados
-Si el pull request se queda anticuado, lo normal es corregirlo para que el responsable pueda fusionarlo fácilmente.
-![](../../../Pasted%20image%2020260413221702.png)
-Si vemos algo parecido a Pull request que no puede fusionarse limpiamente, seguramente prefieras corregir la rama de forma que se vuelva verde denuevo y el responsable no tenga trabajo extra con ella.
-Tienes dos opciones para hacer esto. Por un lado podemos reorganizar (rebase) la rama con el contenido de la rama master o bien podemos fusionar la rama objetivo en la tuya.
-Muchos desarrolladores eligen la segunda opción.
-![](../../../Pasted%20image%2020260413221828.png)
+#### Preparando una versión (Release)
+Para empaquetar una instantánea del código para personas que no usan Git, utilizamos `git archive`.
+![](Bibliografia/Pasted%20image%2020260413213730.png)
+Esto genera, por ejemplo, un archivo `.tar` o `.zip` con el estado actual del proyecto limpio.
 
-## Markdown
-El formato Markdown es como escribir en texto plano pero que luego se convierte en texto con formato. 
-En GitHub se añaden algunas cosas a la sintaxis básica del Markdown, son útiles al tener relacion con los pull requests o las incidencias.
-La prmera caracteristica añadida son las listas de tareas, podemos crear una lista de tareas así: ![](../../../Pasted%20image%2020260413222601.png)
-Además se mostraran esas listas de tareas como metadatos de las páginas que las muestran.
-También se pueden añadir fragmentos de código a los comentarios. Esto resulta útil para mostrar algo que nos gustaria probar antes de ponerlo en un commit de nuestra rama.
-![](../../../Pasted%20image%2020260413222702.png)
-![](../../../Pasted%20image%2020260413222710.png)
+---
 
-Citas, si estámos respondiendo a un comentario grande, pero solo a una parte podemos citarlo.
-![](../../../Pasted%20image%2020260413222738.png)
-![](../../../Pasted%20image%2020260413222748.png)
-Tambien podemos agregar emojis ![](../../../Pasted%20image%2020260413222826.png)
-También podemos añadir enlaces con imágenes en el formato Markdown a los comentarios.
+## Capítulo 6: GitHub
 
-## Mantenimiento de un proyecto
-## Creación de un repositorio
-Vamos a crear un nuevo repositorio, tocamos en "New Repository" o bien desde el botón "+" en la barra de botones cercano al nombre de usuario.
-![](../../../Pasted%20image%2020260413222959.png)![](../../../Pasted%20image%2020260413223014.png)
-Tenemos que darle un nombre al proyecto, dado que al crearlo no tendra contenido, GitHub nos mostrará instrucciones para crear el repositorio Git, o para conectarlo a un proyecto existente.
+### Creación y Configuración de la Cuenta
 
-## Añadir Colaboradores
-Si estamos trabajando con otras personas y queremos darle acceso de escritura debemos añadirlos como colaboradores.
+GitHub proporciona toda su funcionalidad principal en cuentas gratuitas, permitiendo proyectos públicos y privados ilimitados (con limitación de colaboradores en los privados para planes gratis).
 
-## Gestión de los Pull Requests
-Ahora que tenemos un proyecto con algo de código, veremos que pasa cuando alguien hace un pull request.
+* **Acceso SSH:** Si prefieres utilizar SSH en lugar de HTTPS, necesitas configurar una clave pública en tu cuenta.
+* **Tu icono / Correos:** Puedes personalizar tu avatar y vincular múltiples direcciones de correo (útil para que GitHub identifique todas tus contribuciones de Git, independientemente del correo que usaste en local).
+* **Seguridad:** Es altamente recomendable configurar la Autentificación de Dos Pasos (2FA).
 
-## Notificaciones por correo electronico.
-Cuando alguien realiza un cambio en el código y te crea un Pull Request, debes recibir una notificación por correo electrónico avisándote, con un aspecto similar a Notificación por correo de nuevo Pull Request.
-![](../../../Pasted%20image%2020260413223254.png)
+---
 
-## Referencias de Pull Request
-Si tenemos muchos Pull Request y no queremos añadir un montón de remotos o hacer muchos cada vez, hay un pequeño truco que GitHub te permite. Es un poco avanzado y lo veremos en detalle después.
-En GitHub tenemos que las ramas de Pull Request son una especie de pseudo-ramas del servidor. De forma predeterminada no las obtendrás cuando hagas un clonado, pero hay una forma algo oscura de acceder a ellos.
-Para demostrarlo, usaremos un comando de bajo nivel llamado `ls-remote`. Este comando no se suele usar en el día a día de GIt pero es útil para ver las referencias presentes en el servidor.
-Si ejecutamos este comando sobre el repositorio "blink" que se uso anteriormente obtendremos una lista de ramas, etiquetas y otras referencias del repositorio.
-![](../../../Pasted%20image%2020260413223554.png)
-Por supuesto, si estamos en nuestro repositorio y tecleamos `git ls-remote origin` podemos ver algo similar pero para el remoto etiquetado como origin.
-Si el repositorio está en GitHub y tenemos Pull Requests abiertos, tendremos estas referencias con el prefijo `refs/pull`. Básicamente, son ramas, pero ya que no están bajo `refs/heads/`, no las obtendrás normalmente cuando clonas o te bajas el repositorio del servidor, ya que el proceso de obtención las ignora.
-Hay dos referencias por cada Pull Requests, la que termina en `/heads` apunta exactamente al último commit de la rama del Pull Request. Así si alguien abre un Pull Request en el repositorio y su rama se llama `bug-fix` apuntando al commit `a5a775`, en nuestro repositorio no tendremos una rama `bug-fix` pero tendremos el `pull/<pr#>/head` apuntando a `a5a775`. Esto significa que podemos obtener fácilmente cada Pull Request sin tener que añadir un monton de remotos.
-Ahora podemos obtenerlo directamente.
-![](../../../Pasted%20image%2020260413224427.png)
+### Participando en Proyectos
 
-## Menciones y notificaciones
-En cualquier comentario si comenzamos una palabra anteponiendo "@" podemos realizar una mencion a un usuario colaborador.
+#### Bifurcación (Fork) de proyectos
+Para participar en un proyecto sin permisos de escritura, debes hacer un *fork*. Solo visita la página del proyecto y pulsa el botón **"Fork"**. Esto creará una copia del código fuente en tu cuenta.
 
-## Archivos Especiales
-## README
-Puede estar en varios formatos, con los nombres "README","README.md", "README.asciidoc" y alguno más. Cuando GitHub detecta su presencia en el proyecto, lo muestra en la página principal, con el renderizado que corresponda a su formato.
+#### El flujo de Trabajo en GitHub
+GitHub está diseñado alrededor de un flujo de colaboración centrado en los **Pull Requests** (Solicitudes de Integración).
 
-## CONTRIBUTING
-Si tenemos un archivo con este nombre y cualquier extensión, se mostrará algo como APertura de un Pull Request cuando existe el archivo Contributing, cuando se intente abrir un pull request.
-![](../../../Pasted%20image%2020260413224856.png)
+![](Bibliografia/Pasted%20image%2020260413215211.png)
 
-## Administración del proyecto
-Por lo general, no hay muchas cosas que administrar en un proyecto concreto, pero hay un par de cosas que pueden ser interesantes.
+> [!NOTE] Recordatorio
+> Esto es básicamente el flujo de trabajo del Responsable de Integración (visto en el Capítulo 5), pero sustituyendo el intercambio de correos electrónicos por las herramientas web y visuales de GitHub.
 
-## Cambiar la rama predeterminada
-Si usamos como rama predeterminada una que no sea "master", por ejemplo para que sea objetivo de los Pull Request, podemos cambiarla en las opciones de configuración del repositorio.
-![](../../../Pasted%20image%2020260413225005.png)
+#### Creación del Pull Request
+1. Haces un Fork.
+2. Clonas localmente, creas una rama, realizas el cambio y haces *push* a tu repositorio en GitHub.
+![](Bibliografia/Pasted%20image%2020260413215604.png)
+3. En GitHub aparecerá un aviso de la nueva rama con un botón para **"Compare & pull request"**.
+![](Bibliografia/Pasted%20image%2020260413215913.png)
+4. Al pulsar el botón verde, añades un título y descripción justificando el cambio. Podrás ver el "diff unificado" de los cambios propuestos.
+![](Bibliografia/Pasted%20image%2020260413220027.png)
+5. Al crearlo, el propietario del proyecto recibirá una notificación.
 
-## Transferencia de un proyecto
-Si queremos transferir la propiedad de un proyecto a otro usuario u organización, hay una opción para ello.
+#### Evolución del Pull Request
+El propietario puede revisar el cambio, incorporarlo, comentarlo o rechazarlo.
+![](Bibliografia/Pasted%20image%2020260413220651.png)
 
+Los comentarios se pueden dejar línea por línea directamente en el código ("diff").
+![](Bibliografia/Pasted%20image%2020260413220757.png)
 
-## Scripting en GItHub
+Si hay que hacer correcciones, el colaborador solo tiene que hacer nuevos commits en su rama local y hacer *push*. El Pull Request en GitHub se actualizará automáticamente con los nuevos cambios.
+![](Bibliografia/Pasted%20image%2020260413220856.png)
 
-## Enganches (Hooks)
-Las secciones Hooks y Services, de la pagina de administración del repositorio en GIthub, es la forma más simple de hacer que GitHub interactúe con sistemas externos.
+#### Pull Requests como Parches y Mantenimiento
+Casi todos los proyectos de GitHub consideran las ramas de Pull Request como **conversaciones evolutivas**, no como parches perfectos a la primera.
 
-## Servicios
-En primer lugar, echaremos un ojo a los Servicios. Ambos, enganches y servicios, pueden configurarse desde la sección Settings del repositorio, el mismo sitio donde vimos que podíamos añadir colaboradores. Bajo la opción "Webhooks and Services"
-![](../../../Pasted%20image%2020260413225451.png)
-Hay muchos servicios que podemos elegir, muchos de ellos para integrarse en otros sistemas de código abierto o comerciales. Muchos son servicios de integración continua, gestores de incidencias y fallos, salas de charla y sistemas de documentación.
+Si un Pull Request se queda anticuado y surgen conflictos, el colaborador debe:
+* Hacer *Rebase* de su rama con la rama `master` del original.
+* O bien, fusionar la rama objetivo en la suya propia para arreglar los conflictos localmente y volver a subir.
+![](Bibliografia/Pasted%20image%2020260413221702.png)
+![](Bibliografia/Pasted%20image%2020260413221828.png)
 
-## Hooks
-Si necesitamos algo más concreto o queremos integrarlo con un servicio o sitio no incluido en la lista podemos usar el sistema de enganches, indicamos una URL y GitHub enviara una peticion HTTP a dicha URL cada vez que suceda el evento que queramos.
+---
+
+### Markdown en GitHub (GFM)
+
+GitHub utiliza un formato enriquecido de Markdown que incluye características extra muy útiles:
+* **Listas de tareas:** ![](Bibliografia/Pasted%20image%2020260413222601.png)
+* **Fragmentos de código:** Para mostrar bloques de código en los comentarios.
+  ![](Bibliografia/Pasted%20image%2020260413222702.png)
+  ![](Bibliografia/Pasted%20image%2020260413222710.png)
+* **Citas Específicas:** Permiten citar y responder a partes concretas de un comentario largo.
+  ![](Bibliografia/Pasted%20image%2020260413222738.png)
+  ![](Bibliografia/Pasted%20image%2020260413222748.png)
+* **Emojis:** ![](Bibliografia/Pasted%20image%2020260413222826.png)
+
+---
+
+### Mantenimiento de un Proyecto en GitHub
+
+#### Creación y Configuración Básica
+Para crear un nuevo repositorio, usa el botón **"+"** o **"New Repository"**.
+![](Bibliografia/Pasted%20image%2020260413222959.png) ![](Bibliografia/Pasted%20image%2020260413223014.png)
+* **Colaboradores:** Puedes dar acceso directo de escritura a otras personas desde la configuración del repositorio.
+* **Notificaciones por correo:** Recibirás correos cuando te abran un Pull Request.
+![](Bibliografia/Pasted%20image%2020260413223254.png)
+
+#### Referencias de Pull Request Avanzadas (`ls-remote`)
+En GitHub, las ramas de los Pull Requests son pseudo-ramas ocultas en el servidor que el clonado por defecto ignora. 
+Con el comando `git ls-remote origin` puedes ver todas las referencias del servidor.
+![](Bibliografia/Pasted%20image%2020260413223554.png)
+
+Los Pull Requests tienen el prefijo `refs/pull/`. Puedes obtener (`fetch`) un PR específico directamente configurando tu archivo Git o llamando al comando exacto sin necesidad de agregar un control remoto (*remote*) por cada persona que contribuya.
+![](Bibliografia/Pasted%20image%2020260413224427.png)
+
+#### Archivos Especiales
+* **`README.md`:** Se renderiza automáticamente en la página principal del proyecto.
+* **`CONTRIBUTING.md`:** Si existe, GitHub mostrará un aviso enlazando a este archivo cuando alguien intente abrir un Issue o Pull Request, guiándolos sobre cómo prefieres recibir las contribuciones.
+![](Bibliografia/Pasted%20image%2020260413224856.png)
+
+#### Administración del Proyecto
+* **Cambiar la rama predeterminada:** Puedes elegir que la rama principal sea otra distinta a `master` (ej. `main` o `develop`).
+![](Bibliografia/Pasted%20image%2020260413225005.png)
+* **Transferir propiedad:** Puedes ceder el proyecto a otra organización o usuario.
+
+#### Scripting en GitHub (Hooks y Servicios)
+Desde la configuración (*Settings* -> *Webhooks and Services*) puedes integrar GitHub con sistemas externos.
+![](Bibliografia/Pasted%20image%2020260413225451.png)
+* **Servicios:** Integraciones prefabricadas con sistemas de CI/CD, gestores de tickets, chats, etc.
+* **Hooks (Enganches):** Más genéricos; configuras una URL y GitHub enviará una petición HTTP (payload) cada vez que suceda un evento específico (ej. un *push* o un nuevo *Pull Request*).
