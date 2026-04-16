@@ -2,7 +2,7 @@
 materia: Desarrollo de Software
 unidad: 1
 ---
-# 📦 Unidad 1: Introducción y Control de Versiones
+![](../../Bibliografia/DSW2026_EJ04.pdf)# 📦 Unidad 1: Introducción y Control de Versiones
 
 > [!NOTE] 📖 Material de Estudio
 > - **Obligatorio:** Pro Git, 2da Edición (Cap 1-6) ![progit](../../Bibliografia/progit.pdf).
@@ -20,7 +20,7 @@ unidad: 1
 ### Clase 4: GitHub y Entornos Distribuidos
 - **Temas:** Git en entornos distribuidos (`[[GitHub]]`).
 - [x] **Lectura:** Pro Git Cap 5 y 6.[C4_Lecturas](C4_Lecturas.md)
-- [ ] **Ejercicio 4:** Control de Versiones.
+- [ ] **Ejercicio 4:** Control de Versiones.![EJ04](../../Bibliografia/DSW2026_EJ04.pdf)
 
 ---
 **Estructura en las VM (Referencia):**

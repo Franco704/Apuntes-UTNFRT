@@ -53,3 +53,4 @@ Componentes del sistema:
 * **Seguridad:**
 	* Incluyen protección de datos frente a accesos no autorizados, fallos, y modificación. 
 	* También incluye la implementación de políticas, procedimientos y recuperación de interrupciones y pérdidas de datos.
+
