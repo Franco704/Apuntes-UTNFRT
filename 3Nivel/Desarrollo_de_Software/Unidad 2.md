@@ -1,3 +1,2 @@
-En este archivo queda pendiente agregar la planificacion de la unidad 2.
+### Clase 5: Introducción a C# y .NET - [x] **Resumen Bibliografía:** [C5_Lecturas](C5_Lecturas.md)| 
 
-[Lecturas Clase 5](C5_Lecturas.md)

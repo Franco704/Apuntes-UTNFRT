@@ -20,11 +20,8 @@ unidad: 1
 ### Clase 4: GitHub y Entornos Distribuidos
 - **Temas:** Git en entornos distribuidos (`[[GitHub]]`).
 - [x] **Lectura:** Pro Git Cap 5 y 6.[C4_Lecturas](C4_Lecturas.md)
-- [ ] **Ejercicio 4:** Control de Versiones.![EJ04](../../Bibliografia/DSW2026_EJ04.pdf)
+- [x] **Ejercicio 4:** Control de Versiones.![EJ04](../../Bibliografia/DSW2026_EJ04.pdf)
 
 ---
 **Estructura en las VM (Referencia):**
 ![Pasted image 20260331204311](../../Bibliografia/Pasted%20image%2020260331204311.png)
-
-Siguiente:
-[Unidad 2](Unidad%202.md)
